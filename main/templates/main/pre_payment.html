@@ -1,0 +1,36 @@
+{% extends "layout/basic.html" %}
+{% load bootstrap4 %}
+{% load static %}
+{% block title %}Поддержать сайт{% endblock %}
+{% block content %}
+    <h2>Поддержать сайт</h2>
+    <form name="payment" method="post" action="{% url 'payment:donations_handle' %} "
+          accept-charset="UTF-8">
+        {% csrf_token %}
+        <input type="hidden" name="merchant" value="{{ merchant }}"/>
+        <label>Введите суму
+            <br>
+            <input type="number" min="10"  max="10000"  name="amount" value="25"/>
+        </label>
+        <br>
+        <label>Выберите валюту
+            <br>
+            <select name="in_curr" id="in_curr_id">
+                <option value="UAH">UAH</option>
+                <option value="USD">USD</option>
+                <option value="EUR">EUR</option>
+            </select>
+        </label>
+        <br>
+        <label>Платежная система: Any.Cash</label>
+            <input type="hidden" name="payway"  value="anycash"/>
+        <br>
+        <input type="hidden" name="externalid" value="{{ externalid }}"/>
+        <label>Введите почту<br>
+            <input type="email" required="required" name="client_email" value=""/>
+        </label>
+        <input type="hidden" name="merchant_payfee" value="0,50">
+        <br>
+        <input type="submit" value="Поддержать сайт">
+    </form>
+{% endblock %}

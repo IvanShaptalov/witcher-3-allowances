@@ -1,0 +1,2 @@
+В объявлении {{ comment.bb.title }} появился новый комментарий:
+{{ comment.content }}

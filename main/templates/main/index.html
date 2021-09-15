@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+{% extends "layout/basic.html" %}
+{% load thumbnail %}
+{% load static %}
+{% block content %}
+    {% if bbs %}
+        <ul class="list">
+            {% for bb in bbs %}
+                <li class="media my-5 p-3 border">
+                    {% url 'main:detail' rubric_pk=bb.rubric.pk pk=bb.pk as url %}
+                    <a href="{{ url }}{{ all }}">
+                        {% if bb.image %}
+                            <img class="mr-3" src="{% thumbnail bb.image 'default' %}" alt="">
+                        {% else %}
+                            <img class="mr-3" src="{% static 'main/empty.png' %}" alt="">
+                        {% endif %}
+                    </a>
+                    <div class="media-body"></div>
+                    <h3><a href="{{ url }}{{ all }}">{{ bb.title }}</a></h3>
+                    <div>{{ bb.content }}
+                        <p class="text-right font-weight-bold">{{ bb.price }} tenge</p>
+                        <p class="text-right font-italic">{{ bb.created_at }}</p>
+                    </div>
+                </li>
+            {% endfor %}
+        </ul>
+    {% endif %}
+{% endblock %}
+</body>
+</html>

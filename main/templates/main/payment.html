@@ -1,0 +1,20 @@
+{% extends "layout/basic.html" %}
+{% load bootstrap4 %}
+{% load static %}
+{% block title %}Поддержать сайт{% endblock %}
+{% block content %}
+    <h2>Поддержать сайт</h2>
+    <form name="payment" method="post" action="https://sci.any.money/invoice"           accept-charset="UTF-8">
+        <label>Сумма: {{ amount }} {{ in_curr }}</label><br>
+        <input type="hidden" name="amount" value="{{ amount }}"/>
+        <input type="hidden" name="externalid" value="{{ externalid }}"/>
+        <input type="hidden" name="merchant" value="{{ merchant }}"/>
+        <input type="hidden" name="in_curr" value="{{ in_curr }}"/>
+        <input type="hidden" name="payway" value="{{ payway }}"/>
+        <input type="hidden" name="client_email" value="{{ client_email }}"/>
+        <input type="hidden" name="merchant_payfee" value="{{ merchant_payfee }}">
+        <br>
+        <input type="submit" value="Оплатить">
+        <input type="hidden" name="sign" value="{{ sign }}"/>
+    </form>
+{% endblock %}
